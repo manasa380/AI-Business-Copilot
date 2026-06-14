@@ -6,3 +6,9 @@ __pycache__/
 *.pyo
 *.pyd
 .ipynb_checkpoints/
+.env
+.streamlit/secrets.toml
+firebase_key.json
+auth.key.json
+__pycache__/
+venv/
