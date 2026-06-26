@@ -14,3 +14,11 @@ def get_user():
     except:
         pass
     return None
+
+
+# 🔥 ADD THIS (FIX FOR YOUR PAGES)
+def require_login():
+    if not is_logged_in():
+        st.title("🚀 Please login first")
+        st.login("google")
+        st.stop()

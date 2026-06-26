@@ -130,7 +130,7 @@ st.set_page_config(
 )
 
 # -------------------------
-# LOGIN
+# LOGIN FLOW
 # -------------------------
 if not is_logged_in():
     st.title("🚀 AI Business Copilot SaaS")
@@ -139,7 +139,7 @@ if not is_logged_in():
     st.stop()
 
 # -------------------------
-# WAIT FOR AUTH TO LOAD (IMPORTANT FIX)
+# GET USER (SAFE HANDLING)
 # -------------------------
 user = get_user()
 
@@ -148,7 +148,7 @@ if user is None:
     st.stop()
 
 # -------------------------
-# MAIN APP
+# MAIN DASHBOARD
 # -------------------------
 st.title("🤖 Dashboard")
 st.success(f"Welcome {user.name} 👋")
