@@ -130,32 +130,25 @@ st.set_page_config(
 )
 
 # -------------------------
-# LOGIN FLOW
+# LOGIN
 # -------------------------
 if not is_logged_in():
     st.title("🚀 AI Business Copilot SaaS")
     st.subheader("Sign in with Google to continue")
-
     st.login("google")
     st.stop()
 
 # -------------------------
-# WAIT FOR SESSION TO LOAD SAFELY
+# WAIT FOR AUTH TO LOAD (IMPORTANT FIX)
 # -------------------------
 user = get_user()
 
-# 🔥 IMPORTANT FIX: handle OAuth rerun delay
-if is_logged_in() and user is None:
-    st.info("Loading your session... please wait")
-    st.stop()
-
-# extra safety
 if user is None:
-    st.error("Login failed. Please refresh the page.")
+    st.info("Loading session... please wait")
     st.stop()
 
 # -------------------------
-# MAIN DASHBOARD
+# MAIN APP
 # -------------------------
 st.title("🤖 Dashboard")
 st.success(f"Welcome {user.name} 👋")
