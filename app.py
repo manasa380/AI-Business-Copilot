@@ -1,5 +1,4 @@
-'''
-import streamlit as st
+'''import streamlit as st
 from utils.auth import is_logged_in, get_user
 
 st.set_page_config(
@@ -42,7 +41,7 @@ with st.sidebar:
     if st.button("🚪 Logout"):
         st.logout()
         st.rerun()
-        '''
+        
 import streamlit as st
 from utils.auth import is_logged_in, get_user
 
@@ -120,3 +119,58 @@ elif menu == "🧠 SQL Generator":
 
 elif menu == "📄 Business Report":
     st.write("Report generator module goes here")
+'''
+import streamlit as st
+from utils.auth import is_logged_in, get_user
+
+st.set_page_config(
+    page_title="AI Business Copilot",
+    page_icon="🚀",
+    layout="wide"
+)
+
+# -------------------------
+# LOGIN FLOW
+# -------------------------
+if not is_logged_in():
+    st.title("🚀 AI Business Copilot SaaS")
+    st.subheader("Sign in with Google to continue")
+
+    st.login("google")
+    st.stop()
+
+# -------------------------
+# WAIT FOR SESSION TO LOAD SAFELY
+# -------------------------
+user = get_user()
+
+# 🔥 IMPORTANT FIX: handle OAuth rerun delay
+if is_logged_in() and user is None:
+    st.info("Loading your session... please wait")
+    st.stop()
+
+# extra safety
+if user is None:
+    st.error("Login failed. Please refresh the page.")
+    st.stop()
+
+# -------------------------
+# MAIN DASHBOARD
+# -------------------------
+st.title("🤖 Dashboard")
+st.success(f"Welcome {user.name} 👋")
+st.caption(f"Logged in as {user.email}")
+
+# -------------------------
+# SIDEBAR
+# -------------------------
+with st.sidebar:
+    st.write("👤 User Info")
+    st.write("Name:", user.name)
+    st.write("Email:", user.email)
+
+    st.divider()
+
+    if st.button("🚪 Logout"):
+        st.logout()
+        st.rerun()

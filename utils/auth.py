@@ -1,9 +1,5 @@
 import streamlit as st
 
-# -------------------------
-# AUTH HELPERS
-# -------------------------
-
 def is_logged_in():
     try:
         return getattr(st.user, "is_logged_in", False)
@@ -12,12 +8,9 @@ def is_logged_in():
 
 
 def get_user():
-    if is_logged_in():
-        return st.user
+    try:
+        if is_logged_in() and hasattr(st.user, "email"):
+            return st.user
+    except:
+        pass
     return None
-
-
-def require_login():
-    if not is_logged_in():
-        st.login("google")
-        st.stop()
