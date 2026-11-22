@@ -31,3 +31,4 @@ streamlit-extras
 
 google-auth
 google-auth-oauthlib
+Authlib
